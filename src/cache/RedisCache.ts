@@ -10,11 +10,8 @@ export class RedisCache implements ICacheDriver {
   get: <R = any>(key: string) => Promise<R> = (key: string) => {
     return RedisCache.redis
       .get(key)
-      .then((i) => {
-        return i;
-      })
       .then((str) => JSON.parse(str) as RedisCachePack)
-      .then((res) => res.value) as Promise<any>;
+      .then((res) => (res || { value: null }).value) as Promise<any>;
   };
   set: <T = any>(key: string, value: T, expire?: number) => void = (
     key,
