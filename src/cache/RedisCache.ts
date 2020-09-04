@@ -11,7 +11,6 @@ export class RedisCache implements ICacheDriver {
     return RedisCache.redis
       .get(key)
       .then((i) => {
-        console.log(i);
         return i;
       })
       .then((str) => JSON.parse(str) as RedisCachePack)
@@ -22,7 +21,6 @@ export class RedisCache implements ICacheDriver {
     value,
     expire,
   ) => {
-    console.log({value})
     RedisCache.redis.set(key, JSON.stringify({ value }));
     if (expire !== Number.MAX_SAFE_INTEGER)
       RedisCache.redis.expire(key, expire);

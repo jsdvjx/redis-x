@@ -15,7 +15,7 @@ const createCacheHandler = (
     if (type === 'local') {
       let result = LocalCache.instance.get(pkey);
       if (result) {
-        return Promise.resolve(result);
+        return  Promise.resolve(result);
       }
       result = LocalCache.instance.get(key);
       if (result) {
@@ -24,7 +24,7 @@ const createCacheHandler = (
       const _r = fun(...args);
       if (_r instanceof Promise) {
         return _r.then((_res) => {
-          LocalCache.instance.set(key, _res, expire);
+          LocalCache.instance.set(pkey, _res, expire);
           return _res;
         });
       }
@@ -33,7 +33,6 @@ const createCacheHandler = (
     }
     if (type === 'redis') {
       return RedisCache.instance.get(key).then((result) => {
-        console.log(key, result);
         if (!result) {
           const _rp = fun(...args);
           if (_rp instanceof Promise) {

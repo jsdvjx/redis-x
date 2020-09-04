@@ -53,7 +53,6 @@ export class RedisWrap {
       cache =async (...args: any[]) => {
         return handler.call(RedisWrap.instance, ...[...args, callback]);
       };
-      console.log(cache)
       RedisWrap.map.set(handler, cache);
     }
     return cache;
