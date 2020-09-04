@@ -39,19 +39,19 @@ export class RedisWrap {
   private static proxy: Wrap;
   private static map: Map<any, any> = new Map();
   private static build = <T = typeof redis>(handler: T[keyof T]) => {
-    const callback = (error: Error | null, result: any) => {
-      if (error) {
-        return Promise.reject(error);
-      }
-      return Promise.resolve(result);
-    };
     if (typeof handler !== 'function') {
       return handler;
     }
     let cache = RedisWrap.map.get(handler);
     if (!cache) {
-      cache =async (...args: any[]) => {
-        return handler.call(RedisWrap.instance, ...[...args, callback]);
+      cache = async (...args: any[]) => {
+        return new Promise((resolve, reject) => {
+          handler.bind(RedisWrap.instance)(
+            ...args,
+            (error: Error | null, result: any) =>
+              error ? reject(error) : resolve(result),
+          );
+        });
       };
       RedisWrap.map.set(handler, cache);
     }

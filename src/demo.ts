@@ -12,10 +12,11 @@ export class test {
   }
   @Cache('redis', 1000)
   ttt = (): Promise<number> => {
+    console.log(32321321312)
     return Promise.resolve(321);
   };
 }
 const x = new test();
-x.bb().then((i)=>{
-  x.bb()
+x.ttt().then((i)=>{
+  x.ttt()
 })
