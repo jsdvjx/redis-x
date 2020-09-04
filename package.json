@@ -1,0 +1,38 @@
+{
+  "name": "redis-x",
+  "version": "0.0.1",
+  "description": "> TODO: description",
+  "author": "jx <841207@gmail.com>",
+  "homepage": "",
+  "private": false,
+  "license": "ISC",
+  "main": "dist/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jsdvjx/redis-x.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "build": "rimraf dist&&tsc"
+  },
+  "gitHead": "52725f03d09565f9002819a78c6110b5724682a0",
+  "dependencies": {
+    "dayjs": "^1.8.35",
+    "redis": "^3.0.2",
+    "reflect-metadata": "^0.1.13"
+  },
+  "devDependencies": {
+    "@types/redis": "^2.8.27",
+    "@typescript-eslint/eslint-plugin": "^3.7.1",
+    "@typescript-eslint/parser": "^3.7.1",
+    "eslint": "^7.5.0",
+    "eslint-config-prettier": "^6.11.0",
+    "prettier": "^2.0.5",
+    "rimraf": "^3.0.2",
+    "ts-node": "^8.10.1",
+    "typescript": "^4.0.0-beta"
+  }
+}
