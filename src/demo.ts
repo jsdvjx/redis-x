@@ -11,12 +11,9 @@ export class test {
     return Promise.resolve('set');
   }
   @Cache('redis', 1000)
-  ttt = (): Promise<number> => {
-    console.log(32321321312)
+  static ttt = async (): Promise<number> => {
+    console.log(32321321312);
     return Promise.resolve(321);
   };
 }
-const x = new test();
-x.ttt().then((i)=>{
-  x.ttt()
-})
+test.ttt().then(console.log)

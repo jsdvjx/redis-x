@@ -15,7 +15,7 @@ const createCacheHandler = (
     if (type === 'local') {
       let result = LocalCache.instance.get(pkey);
       if (result) {
-        return  Promise.resolve(result);
+        return Promise.resolve(result);
       }
       result = LocalCache.instance.get(key);
       if (result) {
@@ -85,6 +85,11 @@ export const Cache = <T extends CacheDriverType = 'local'>(
       Reflect.defineMetadata('cacheName', key, value);
       reciver.value = createCacheHandler(value, driver, expire) as any;
       return reciver as any;
+    }
+    if (target[prop]) {
+      target[prop] = createCacheHandler(target[prop], driver, expire);
+      Reflect.defineMetadata('cacheName', key, target[prop]);
+      return;
     }
     Reflect.defineProperty(target, prop, {
       get: () => {
